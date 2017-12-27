@@ -22,8 +22,8 @@ Control your Festo CPX through UDP packets
 | `name`                           | name of the accessory                                   |     ✓    |
 | `host`                           | endpoint for whatever is receiving these requests       |     ✓    |
 | `port`                           | port of destination                                     |     ✓    |
-| `off_payload`                 | payload for the unlock state                            |     ✓    |
-| `on_payload`                   | payload for the lock state                              |     ✓    |
+| `off_payload`                 | payload for the off state                            |     ✓    |
+| `on_payload`                   | payload for the on state                              |     ✓    |
 | `defaultState`                   | default state when restarting (lock/unlock)             |     ✓    |
 
 ## Help
