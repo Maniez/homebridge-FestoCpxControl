@@ -8,9 +8,9 @@ module.exports = function (host, port, payload, callback) {
 
 
   setTimeout(function() { 
-    client.send(broadcast, 0, broadcast.length, port, host, function(err, bytes) {
-      if (err) throw err;
-      console.log('UDP message sent to ' + host +':'+ port);
+    //client.send(broadcast, 0, broadcast.length, port, host, function(err, bytes) {
+    //  if (err) throw err;
+    //  console.log('UDP message sent to ' + host +':'+ port);
 
       client.send(message, 0, message.length, port, host, function(err, bytes) {
         if (err) throw err;
@@ -20,6 +20,6 @@ module.exports = function (host, port, payload, callback) {
         callback(err);
       });
 
-    });
+   // });
   }, 50);
 }
