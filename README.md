@@ -1,17 +1,17 @@
-# homebridge-udp-lock
-Control your lock through UDP packets
+# homebridge-FestoCpxControl
+Control your Festo CPX through UDP packets
 
 
 # config.json
 
 ```
 {
-        "accessory": "UDPlock",
+        "accessory": "FestoCpxControl",
         "name": "My Lock",
         "host": "192.168.0.X",
         "port": 80,
-        "lock_payload": "874652395hjui4d98523",
-        "unlock_payload": "8932y4123545j5k245325",
+        "on_payload": "874652395hjui4d98523",
+        "off_payload": "8932y4123545j5k245325",
 }
 ```
 
@@ -22,8 +22,8 @@ Control your lock through UDP packets
 | `name`                           | name of the accessory                                   |     ✓    |
 | `host`                           | endpoint for whatever is receiving these requests       |     ✓    |
 | `port`                           | port of destination                                     |     ✓    |
-| `unlock_payload`                 | payload for the unlock state                            |     ✓    |
-| `lock_payload`                   | payload for the lock state                              |     ✓    |
+| `off_payload`                 | payload for the unlock state                            |     ✓    |
+| `on_payload`                   | payload for the lock state                              |     ✓    |
 | `defaultState`                   | default state when restarting (lock/unlock)             |     ✓    |
 
 ## Help
@@ -33,5 +33,5 @@ Control your lock through UDP packets
 ## Installation
 
 1. Install homebridge using: `npm install -g homebridge`
-2. Install this plugin using: `npm install -g homebridge-udp-lock`
+2. Install this plugin using: `npm install -g homebridge-FestoCpxControl`
 3. Update your config file
