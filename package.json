@@ -1,0 +1,27 @@
+{
+  "name": "homebridge-FestoCpxControl",
+  "version": "1.0.0",
+  "author": "mand",
+  "description": "A Homebridge plugin to control Festo CPX trough UDP packets",
+  "license": "MIT",
+  "homepage": "https://github.com/nitaybz/homebridge-FestoCpxControl#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitaybz/homebridge-FestoCpxControl.git"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "homebridge",
+    "Festo",
+    "udp"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/nitaybz/homebridge-FestoCpxControl/issues"
+  }
+}
