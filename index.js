@@ -21,10 +21,8 @@ class FestoCpxControl {
     this.name = config["name"];
     this.host = config["host"];
     this.port = config["port"];
-    this.unlock_payload = config["on_payload"];
-    this.lock_payload = config["off_payload"];
-    this.currentState = (config["defaultState"] == "lock") ? true : false;
-    this.log("locked = " + this.currentState);
+    this.on_payload = config["on_payload"];
+    this.off_payload = config["off_payload"];
 
     // setup
     this.log = log;
@@ -56,9 +54,9 @@ class FestoCpxControl {
         let host_ip = this.host;
         let host_port = this.port;
         if(state) {
-          signal = this.signalOn;
+          signal = this.on_payload;
         } else {
-          signal = this.signalOff;
+          signal = this.off_payload;
         }
         todoList.push({
           'signal': signal,
