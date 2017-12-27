@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-FestoCpxControl",
+  "name": "homebridge-festocpxcontrol",
   "version": "1.0.0",
   "author": "mand",
   "description": "A Homebridge plugin to control Festo CPX trough UDP packets",
