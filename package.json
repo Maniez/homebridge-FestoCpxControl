@@ -4,10 +4,10 @@
   "author": "mand",
   "description": "A Homebridge plugin to control Festo CPX trough UDP packets",
   "license": "MIT",
-  "homepage": "https://github.com/nitaybz/homebridge-FestoCpxControl#readme",
+  "homepage": "https://github.com/Maniez/homebridge-FestoCpxControl#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nitaybz/homebridge-FestoCpxControl.git"
+    "url": "git+https://github.com/Maniez/homebridge-FestoCpxControl.git"
   },
   "keywords": [
     "homebridge-plugin",
@@ -22,6 +22,6 @@
   },
   "dependencies": {},
   "bugs": {
-    "url": "https://github.com/nitaybz/homebridge-FestoCpxControl/issues"
+    "url": "https://github.com/Maniez/homebridge-FestoCpxControl/issues"
   }
 }

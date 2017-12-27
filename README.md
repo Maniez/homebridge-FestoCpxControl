@@ -1,5 +1,6 @@
 # homebridge-FestoCpxControl
-Control your Festo CPX through UDP packets
+Control your Festo CPX through UDP packets.
+The Plugin is not bound to especially the Festo CPX, you can also only send UDP Packets
 
 
 # config.json
@@ -7,11 +8,11 @@ Control your Festo CPX through UDP packets
 ```
 {
         "accessory": "FestoCpxControl",
-        "name": "My Lock",
+        "name": "My Control",
         "host": "192.168.0.X",
         "port": 80,
-        "on_payload": "874652395hjui4d98523",
-        "off_payload": "8932y4123545j5k245325",
+        "on_payload": "HexValue",
+        "off_payload": "HexValue",
 }
 ```
 
@@ -24,7 +25,6 @@ Control your Festo CPX through UDP packets
 | `port`                           | port of destination                                     |     ✓    |
 | `off_payload`                 | payload for the off state                            |     ✓    |
 | `on_payload`                   | payload for the on state                              |     ✓    |
-| `defaultState`                   | default state when restarting (lock/unlock)             |     ✓    |
 
 ## Help
 
