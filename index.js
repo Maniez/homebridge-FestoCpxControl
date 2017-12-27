@@ -84,13 +84,9 @@ class FestoCpxControl {
     let host_port = todoItem['host_port'];
     let callback = todoItem['callback'];
     // send signal
-    udp(host_ip, host_port, signal, function (err) {
-      if(err) {
-        console.log('error ' + error);
-      } else {
-        console.log('success ');
-      };
-    });
+    localthis.udpRequest(host_ip, host_port, signal, function () {
+        console.log("Switched ", signal);
+    }.bind(this));
     // set timer for next todo
     if (todoList.length > 0) {
       timer = setTimeout(switchObject.toggleNext, timeout, switchObject);
@@ -101,4 +97,15 @@ class FestoCpxControl {
     callback();
   }
 
+}
+
+
+setupCpxSwitchService.prototype.udpRequest = function(host, port, payload, callback) {
+  udp(host, port, payload, function (err) {
+      callback(err);
+  });
+},
+
+setupCpxSwitchService.prototype.getServices = function() {
+return [this.service];
 }
