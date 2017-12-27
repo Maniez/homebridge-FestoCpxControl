@@ -84,7 +84,7 @@ class FestoCpxControl {
     let host_port = todoItem['host_port'];
     let callback = todoItem['callback'];
     // send signal
-    localthis.udpRequest(host_ip, host_port, signal, function () {
+    udpRequest(host_ip, host_port, signal, function () {
         console.log("Switched ", signal);
     }.bind(this));
     // set timer for next todo
