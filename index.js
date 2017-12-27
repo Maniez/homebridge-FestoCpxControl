@@ -100,12 +100,12 @@ class FestoCpxControl {
 }
 
 
-setupCpxSwitchService.prototype.udpRequest = function(host, port, payload, callback) {
+udpRequest = function(host, port, payload, callback) {
   udp(host, port, payload, function (err) {
       callback(err);
   });
 },
 
-setupCpxSwitchService.prototype.getServices = function() {
+getServices = function() {
 return [this.service];
 }
