@@ -17,7 +17,10 @@ module.exports = (homebridge) => {
 
 class FestoCpxControl {
   constructor(log, config) {
-
+    this.log = log;
+    this.name = config.name;
+    this.listen_port = config.listen_port || 8268;
+/*
     // config
     this.name = config["name"];
     this.host = config["host"];
@@ -30,7 +33,7 @@ class FestoCpxControl {
     // setup
     this.log = log;
 
-/*
+
     this.service = new Service.Switch(this.name);
     //this.setupCpxSwitchService(this.service);
 
