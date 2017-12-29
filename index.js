@@ -56,10 +56,14 @@ class FestoCpxControl {
 
     this.server.on('message', (msg, rinfo) => {
       console.log(`server received udp: ${msg} from ${rinfo.address}`);
-      if(msg == 0x0100) {
+      const buf = Buffer.from('0100', 'hex');
+      console.log(buf.toString('hex'));
+      console.log(buf.toString('ascii'));
+      if(msg == '0100') {
           console.log(`passt`);
       } else {
         console.log(`passt nicht`);
+        console.log(`passt nicht` + msg.toHex());
       };
     });
 
