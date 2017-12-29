@@ -24,7 +24,7 @@ class FestoCpxControl {
     this.port = config["port"];
     this.on_payload = config["on_payload"];
     this.off_payload = config["off_payload"];
-    this.listen_port = config["listen_port"];
+    this.listen_port = config["listen_port"] || 8268;
     this.currentState = false;
 
     // setup
@@ -50,34 +50,15 @@ class FestoCpxControl {
 
     this.server = dgram.createSocket('udp4');
 
+/*
     this.server.on('error', (err) => {
       console.log(`udp server error:\n${err.stack}`);
       this.server.close();
     });
+*/
 
     this.server.on('message', (msg, rinfo) => {
       console.log(`server received udp: ${msg} from ${rinfo.address}`);
-
-      let json;
-      try {
-          json = JSON.parse(msg);
-      } catch (e) {
-          console.log(`failed to decode JSON: ${e}`);
-          return;
-      }
-
-      const temperature_c = json.temperature_c;
-      //const pressure_hPa = json.pressure_hPa; // TODO
-      //const altitude_m = json.altitude_m;
-      const humidity_percent = json.humidity_percent;
-
-      this.temperatureService
-        .getCharacteristic(Characteristic.CurrentTemperature)
-        .setValue(temperature_c);
-
-      this.humidityService
-        .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        .setValue(humidity_percent);
     });
 
     this.server.bind(this.listen_port);
