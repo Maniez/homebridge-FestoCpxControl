@@ -65,7 +65,7 @@ class FestoCpxControl {
     } else {
       signal = this.on_payload;
       this.currentState = true;
-      udpRequest(this.host, this.port, this.off_payload, function () {
+      udpRequest(this.host, this.port, this.on_payload, function () {
           console.log("Switched ", this.on_payload);
       }.bind(this));
     }
