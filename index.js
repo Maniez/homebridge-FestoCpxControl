@@ -29,6 +29,7 @@ class FestoCpxControl {
 
     // setup
     this.log = log;
+/*
     this.service = new Service.Switch(this.name);
     //this.setupCpxSwitchService(this.service);
 
@@ -36,6 +37,7 @@ class FestoCpxControl {
       .getCharacteristic(Characteristic.On)
       .on('get', this.getState.bind(this))
       .on('set', this.setState.bind(this));
+*/
 
     // information service
     this.informationService = new Service.AccessoryInformation();
