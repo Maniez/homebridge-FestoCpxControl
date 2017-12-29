@@ -29,6 +29,8 @@ class FestoCpxControl {
 
     // setup
     this.log = log;
+
+/*
     this.service = new Service.Switch(this.name);
     //this.setupCpxSwitchService(this.service);
 
@@ -47,7 +49,7 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.SerialNumber, '5');;
 
     //UDP Server Code
-/*
+
     this.server = dgram.createSocket('udp4');
 
 
@@ -63,6 +65,59 @@ class FestoCpxControl {
 
     this.server.bind(this.listen_port);
 */
+
+this.informationService = new Service.AccessoryInformation();
+
+this.informationService
+  .setCharacteristic(Characteristic.Manufacturer, "Bosch")
+  .setCharacteristic(Characteristic.Model, "RPI-UDPJSON")
+  .setCharacteristic(Characteristic.SerialNumber, this.device);
+
+this.temperatureService = new Service.TemperatureSensor(this.name_temperature);
+
+this.temperatureService
+  .getCharacteristic(Characteristic.CurrentTemperature)
+  .setProps({
+    minValue: -100,
+    maxValue: 100
+  });
+
+this.humidityService = new Service.HumiditySensor(this.name_humidity);
+
+this.server = dgram.createSocket('udp4');
+
+this.server.on('error', (err) => {
+  console.log(`udp server error:\n${err.stack}`);
+  this.server.close();
+});
+
+this.server.on('message', (msg, rinfo) => {
+  console.log(`server received udp: ${msg} from ${rinfo.address}`);
+
+  let json;
+  try {
+      json = JSON.parse(msg);
+  } catch (e) {
+      console.log(`failed to decode JSON: ${e}`);
+      return;
+  }
+
+  const temperature_c = json.temperature_c;
+  //const pressure_hPa = json.pressure_hPa; // TODO
+  //const altitude_m = json.altitude_m;
+  const humidity_percent = json.humidity_percent;
+
+  this.temperatureService
+    .getCharacteristic(Characteristic.CurrentTemperature)
+    .setValue(temperature_c);
+
+  this.humidityService
+    .getCharacteristic(Characteristic.CurrentRelativeHumidity)
+    .setValue(humidity_percent);
+});
+
+this.server.bind(this.listen_port);
+
   }
 
   getServices() {
