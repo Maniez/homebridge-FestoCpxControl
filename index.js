@@ -47,22 +47,22 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.SerialNumber, '5');;
 
     //UDP Server Code
-
+/*
     this.server = dgram.createSocket('udp4');
 
-/*
+
     this.server.on('error', (err) => {
       console.log(`udp server error:\n${err.stack}`);
       this.server.close();
     });
-*/
+
 
     this.server.on('message', (msg, rinfo) => {
       console.log(`server received udp: ${msg} from ${rinfo.address}`);
     });
 
     this.server.bind(this.listen_port);
-
+*/
   }
 
   getServices() {
