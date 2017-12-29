@@ -59,10 +59,17 @@ class FestoCpxControl {
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
+      udpRequest(this.host, this.port, this.off_payload, function () {
+          console.log("Switched ", this.off_payload);
+      }.bind(this));
     } else {
       signal = this.on_payload;
       this.currentState = true;
+      udpRequest(this.host, this.port, this.off_payload, function () {
+          console.log("Switched ", this.on_payload);
+      }.bind(this));
     }
+    /*
     todoList.push({
       'signal': signal,
       'host_ip': host_ip,
@@ -71,7 +78,7 @@ class FestoCpxControl {
     });
     if (timer === null) {
       timer = setTimeout(this.toggleNext, timeout, this);
-    }
+    }*/
   }
 
   getState(callback) {
