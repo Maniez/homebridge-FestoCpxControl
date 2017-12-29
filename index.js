@@ -56,7 +56,7 @@ class FestoCpxControl {
 
     this.server.on('message', (msg, rinfo) => {
       console.log(`server received udp: ${msg} from ${rinfo.address}`);
-      if(msg == "0100") {
+      if(msg == '0100') {
           console.log(`passt`);
         }
     });
