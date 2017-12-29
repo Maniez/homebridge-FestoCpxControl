@@ -19,6 +19,8 @@ class FestoCpxControl {
   constructor(log, config) {
     this.log = log;
     this.name = config.name;
+    this.name_temperature = config.name_temperature || this.name;
+    this.name_humidity = config.name_humidity || this.name;
     this.listen_port = config.listen_port || 8268;
 /*
     // config
