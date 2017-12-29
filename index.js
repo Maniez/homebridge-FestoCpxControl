@@ -131,19 +131,19 @@ this.server.bind(this.listen_port);
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
-/*
+
       udpRequest(this.host, this.port, this.off_payload, function () {
           console.log("Payload send: ", this.off_payload);
       }.bind(this));
-*/
+
     } else {
       signal = this.on_payload;
       this.currentState = true;
-/*
+
       udpRequest(this.host, this.port, this.on_payload, function () {
           console.log("Payload send: ", this.on_payload);
       }.bind(this));
-*/
+
     }
 
     callback();
@@ -155,7 +155,7 @@ this.server.bind(this.listen_port);
 
 }
 
-/*
+
 udpRequest = function(host, port, payload, callback) {
   udp(host, port, payload, function (err) {
       callback(err);
@@ -164,4 +164,3 @@ udpRequest = function(host, port, payload, callback) {
 getServices = function() {
 return [this.service];
 }
-*/
