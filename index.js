@@ -29,7 +29,6 @@ class FestoCpxControl {
 
     // setup
     this.log = log;
-/*
     this.service = new Service.Switch(this.name);
     //this.setupCpxSwitchService(this.service);
 
@@ -37,7 +36,7 @@ class FestoCpxControl {
       .getCharacteristic(Characteristic.On)
       .on('get', this.getState.bind(this))
       .on('set', this.setState.bind(this));
-*/
+
 
     // information service
     this.informationService = new Service.AccessoryInformation();
@@ -45,17 +44,7 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.Name, 'FestoCpxControl')
       .setCharacteristic(Characteristic.Manufacturer, 'mand')
       .setCharacteristic(Characteristic.Model, 'FestoCpxControl ' + this.name)
-      .setCharacteristic(Characteristic.SerialNumber, '5-');
-
-    //Demo Code
-    this.informationService = new Service.AccessoryInformation();
-
-    this.informationService
-      .setCharacteristic(Characteristic.Manufacturer, "Bosch")
-      .setCharacteristic(Characteristic.Model, "RPI-UDPJSON")
-      .setCharacteristic(Characteristic.SerialNumber, 5);
-
-    this.humidityService = new Service.HumiditySensor(this.name_humidity);
+      .setCharacteristic(Characteristic.SerialNumber, '5');;
 
     //UDP Server Code
 
@@ -108,15 +97,19 @@ class FestoCpxControl {
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
+      /*
       udpRequest(this.host, this.port, this.off_payload, function () {
           console.log("Payload send: ", this.off_payload);
       }.bind(this));
+      */
     } else {
       signal = this.on_payload;
       this.currentState = true;
+      /*
       udpRequest(this.host, this.port, this.on_payload, function () {
           console.log("Payload send: ", this.on_payload);
       }.bind(this));
+      */
     }
 
     callback();
@@ -129,7 +122,7 @@ class FestoCpxControl {
 
 }
 
-
+/*
 udpRequest = function(host, port, payload, callback) {
   udp(host, port, payload, function (err) {
       callback(err);
@@ -138,3 +131,4 @@ udpRequest = function(host, port, payload, callback) {
 getServices = function() {
 return [this.service];
 }
+*/
