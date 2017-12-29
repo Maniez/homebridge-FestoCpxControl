@@ -58,7 +58,7 @@ class FestoCpxControl {
       console.log(`server received udp: ${msg} from ${rinfo.address}`);
       var buf = Buffer.from('0100', 'hex');
       console.log(buf.toString('hex'));
-      if(msg == buf.toString('hex')) {
+      if(msg == buf.toString('ascii')) {
           console.log(`passt`);
       } else {
         console.log(`passt nicht`);
