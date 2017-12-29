@@ -1,4 +1,5 @@
 var udp = require('./udp');
+const dgram = require('dgram');
 
 let Service;
 let Characteristic;
@@ -23,6 +24,7 @@ class FestoCpxControl {
     this.port = config["port"];
     this.on_payload = config["on_payload"];
     this.off_payload = config["off_payload"];
+    this.listen_port = config["listen_port"];
     this.currentState = false;
 
     // setup
@@ -43,6 +45,19 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.Model, 'FestoCpxControl ' + this.name)
       .setCharacteristic(Characteristic.SerialNumber, '5-' + this.id);
 
+    this.server = dgram.createSocket('udp4');
+
+    this.server.on('error', (err) => {
+      console.log(`udp server error:\n${err.stack}`);
+      this.server.close();
+    });
+
+    this.server.on('message', (msg, rinfo) => {
+      console.log(`server received udp: ${msg} from ${rinfo.address}`);
+    });
+
+    this.server.bind(this.listen_port);
+
   }
 
   getServices() {
@@ -55,18 +70,17 @@ class FestoCpxControl {
     let signal;
     let host_ip = this.host;
     let host_port = this.port;
-    console.log("state ", this.currentState);
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
       udpRequest(this.host, this.port, this.off_payload, function () {
-          console.log("Switched ", this.off_payload);
+          console.log("Payload send: ", this.off_payload);
       }.bind(this));
     } else {
       signal = this.on_payload;
       this.currentState = true;
       udpRequest(this.host, this.port, this.on_payload, function () {
-          console.log("Switched ", this.on_payload);
+          console.log("Payload send: ", this.on_payload);
       }.bind(this));
     }
 
