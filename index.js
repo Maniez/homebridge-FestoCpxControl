@@ -119,6 +119,10 @@ this.server.on('message', (msg, rinfo) => {
 this.server.bind(this.listen_port);
 
   }
+
+  getServices() {
+    return [this.informationService, this.temperatureService, this.humidityService]
+  }
 /*
   getServices() {
     return [this.informationService, this.service];
