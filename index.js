@@ -25,7 +25,7 @@ class FestoCpxControl {
 
     // setup
     this.log = log;
-/*
+
     this.service = new Service.Switch(this.name);
     //this.setupCpxSwitchService(this.service);
 
@@ -42,7 +42,7 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.Manufacturer, 'mand')
       .setCharacteristic(Characteristic.Model, 'FestoCpxControl ' + this.name)
       .setCharacteristic(Characteristic.SerialNumber, '5');;
-
+/*
     //UDP Server Code
 
     this.server = dgram.createSocket('udp4');
@@ -61,6 +61,7 @@ class FestoCpxControl {
     this.server.bind(this.listen_port);
 */
 
+/*
 this.informationService = new Service.AccessoryInformation();
 
 this.informationService
@@ -78,6 +79,7 @@ this.temperatureService
   });
 
 this.humidityService = new Service.HumiditySensor(this.name_humidity);
+*/
 
 this.server = dgram.createSocket('udp4');
 
@@ -116,10 +118,6 @@ this.server.bind(this.listen_port);
   }
 
   getServices() {
-    return [this.informationService, this.temperatureService, this.humidityService]
-  }
-/*
-  getServices() {
     return [this.informationService, this.service];
   }
 
@@ -133,19 +131,19 @@ this.server.bind(this.listen_port);
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
-
+/*
       udpRequest(this.host, this.port, this.off_payload, function () {
           console.log("Payload send: ", this.off_payload);
       }.bind(this));
-
+*/
     } else {
       signal = this.on_payload;
       this.currentState = true;
-
+/*
       udpRequest(this.host, this.port, this.on_payload, function () {
           console.log("Payload send: ", this.on_payload);
       }.bind(this));
-
+*/
     }
 
     callback();
@@ -154,7 +152,6 @@ this.server.bind(this.listen_port);
   getState(callback) {
     callback(null, this.currentState);
   }
-*/
 
 }
 
