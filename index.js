@@ -4,11 +4,6 @@ const dgram = require('dgram');
 let Service;
 let Characteristic;
 
-// command queue
-let todoList = [];
-let timer    = null;
-let timeout  = 200; // timeout between sending rc commands (in ms)
-
 module.exports = (homebridge) => {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
@@ -124,7 +119,7 @@ this.server.on('message', (msg, rinfo) => {
 this.server.bind(this.listen_port);
 
   }
-
+/*
   getServices() {
     return [this.informationService, this.service];
   }
@@ -138,19 +133,19 @@ this.server.bind(this.listen_port);
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
-      /*
+
       udpRequest(this.host, this.port, this.off_payload, function () {
           console.log("Payload send: ", this.off_payload);
       }.bind(this));
-      */
+
     } else {
       signal = this.on_payload;
       this.currentState = true;
-      /*
+
       udpRequest(this.host, this.port, this.on_payload, function () {
           console.log("Payload send: ", this.on_payload);
       }.bind(this));
-      */
+
     }
 
     callback();
@@ -159,7 +154,7 @@ this.server.bind(this.listen_port);
   getState(callback) {
     callback(null, this.currentState);
   }
-
+*/
 
 }
 
