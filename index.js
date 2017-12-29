@@ -23,11 +23,17 @@ class FestoCpxControl {
     this.port = config["port"];
     this.on_payload = config["on_payload"];
     this.off_payload = config["off_payload"];
+    this.currentState = false;
 
     // setup
     this.log = log;
     this.service = new Service.Switch(this.name);
     this.setupCpxSwitchService(this.service);
+
+    this.service
+      .getCharacteristic(Characteristic.On)
+      .on('get', this.getState.bind(this))
+      .on('set', this.setState.bind(this));
 
     // information service
     this.informationService = new Service.AccessoryInformation();
@@ -43,38 +49,32 @@ class FestoCpxControl {
     return [this.informationService, this.service];
   }
 
-  setupCpxSwitchService(service) {
-    let state = false;
+  setState(state, callback) {
+    var on_state = this.currentState;
 
-    service
-      .getCharacteristic(Characteristic.On)
-      .on('set', (value, callback) => {
-        state = value;
-        let signal;
-        let host_ip = this.host;
-        let host_port = this.port;
-        if(state) {
-          signal = this.on_payload;
-        } else {
-          signal = this.off_payload;
-        }
-        todoList.push({
-          'signal': signal,
-          'host_ip': host_ip,
-          'host_port': host_port,
-          'callback': callback
-        });
-        if (timer === null) {
-          timer = setTimeout(this.toggleNext, timeout, this);
-        }
-      });
-
-    service
-      .getCharacteristic(Characteristic.On)
-      .on('get', (callback) => {
-        callback(null, state);
-      });
+    let signal;
+    let host_ip = this.host;
+    let host_port = this.port;
+    if(on_state) {
+      signal = this.on_payload;
+    } else {
+      signal = this.off_payload;
+    }
+    todoList.push({
+      'signal': signal,
+      'host_ip': host_ip,
+      'host_port': host_port,
+      'callback': callback
+    });
+    if (timer === null) {
+      timer = setTimeout(this.toggleNext, timeout, this);
+    }
   }
+
+  getState(callback) {
+    callback(null, this.currentState);
+  }
+
 
   toggleNext(switchObject) {
     // get next todo item
