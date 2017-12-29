@@ -55,10 +55,13 @@ class FestoCpxControl {
     let signal;
     let host_ip = this.host;
     let host_port = this.port;
+    console.log("state ", this.currentState);
     if(on_state) {
-      signal = this.on_payload;
-    } else {
       signal = this.off_payload;
+      this.currentState = false;
+    } else {
+      signal = this.on_payload;
+      this.currentState = true;
     }
     todoList.push({
       'signal': signal,
