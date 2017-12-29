@@ -71,43 +71,12 @@ class FestoCpxControl {
     }
 
     callback();
-    /*
-    todoList.push({
-      'signal': signal,
-      'host_ip': host_ip,
-      'host_port': host_port,
-      'callback': callback
-    });
-    if (timer === null) {
-      timer = setTimeout(this.toggleNext, timeout, this);
-    }*/
   }
 
   getState(callback) {
     callback(null, this.currentState);
   }
 
-
-  toggleNext(switchObject) {
-    // get next todo item
-    let todoItem = todoList.shift();
-    let signal = todoItem['signal'];
-    let host_ip = todoItem['host_ip'];
-    let host_port = todoItem['host_port'];
-    let callback = todoItem['callback'];
-    // send signal
-    udpRequest(host_ip, host_port, signal, function () {
-        console.log("Switched ", signal);
-    }.bind(this));
-    // set timer for next todo
-    if (todoList.length > 0) {
-      timer = setTimeout(switchObject.toggleNext, timeout, switchObject);
-    } else {
-      timer = null;
-    }
-    // call callback
-    callback();
-  }
 
 }
 
@@ -117,7 +86,6 @@ udpRequest = function(host, port, payload, callback) {
       callback(err);
   });
 },
-
 getServices = function() {
 return [this.service];
 }
