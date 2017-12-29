@@ -69,6 +69,8 @@ class FestoCpxControl {
           console.log("Switched ", this.on_payload);
       }.bind(this));
     }
+
+    callback();
     /*
     todoList.push({
       'signal': signal,
