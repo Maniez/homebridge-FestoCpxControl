@@ -59,11 +59,9 @@ class FestoCpxControl {
       var buf = Buffer.from('0100', 'hex');
       console.log(buf.toString('hex'));
       if(msg == buf.toString('ascii')) {
-          console.log(`passt`);
+        this.currentState = true;
       } else {
-        console.log(`passt nicht`);
-        buf = msg;
-        console.log(buf.toString('hex'));
+        this.currentState = false;
       };
     });
 
