@@ -115,12 +115,15 @@ this.server.bind(this.listen_port);
 
   }
 
-
+  getServices() {
+    return [this.informationService, this.temperatureService, this.humidityService]
+  }
+/*
   getServices() {
     return [this.informationService, this.service];
   }
 
-/*
+
   setState(state, callback) {
     var on_state = this.currentState;
 
