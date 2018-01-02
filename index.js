@@ -13,7 +13,6 @@ module.exports = (homebridge) => {
 class FestoCpxControl {
   constructor(log, config) {
 
-
     // config
     this.name = config["name"];
     this.host = config["host"];
@@ -27,13 +26,11 @@ class FestoCpxControl {
     this.log = log;
 
     this.service = new Service.Switch(this.name);
-    //this.setupCpxSwitchService(this.service);
 
     this.service
       .getCharacteristic(Characteristic.On)
       .on('get', this.getState.bind(this))
       .on('set', this.setState.bind(this));
-
 
     // information service
     this.informationService = new Service.AccessoryInformation();
@@ -44,18 +41,17 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.SerialNumber, '5');;
 
     //UDP Server Code
-
     this.server = dgram.createSocket('udp4');
-
 
     this.server.on('error', (err) => {
       console.log(`udp server error:\n${err.stack}`);
       this.server.close();
     });
 
-
     this.server.on('message', (msg, rinfo) => {
-      console.log(`server received udp: ${msg} from ${rinfo.address}`);
+      var receive_buffer = Buffer.from('0000', 'hex');
+      receive_buffer = msg;
+      console.log(`Accessory ${this.name} received UDP message: "${receive_buffer.toString('hex')}" from ${rinfo.address}`);
       var buf = Buffer.from('0100', 'hex');
       if(msg == buf.toString('ascii')) {
         this.currentState = true;
@@ -65,7 +61,6 @@ class FestoCpxControl {
     });
 
     this.server.bind(this.listen_port);
-
   }
 
   getServices() {
@@ -74,36 +69,25 @@ class FestoCpxControl {
 
 
   setState(state, callback) {
-    var on_state = this.currentState;
-
-    let signal;
-    let host_ip = this.host;
-    let host_port = this.port;
-    if(on_state) {
-      signal = this.off_payload;
+    var on_state = state;
+    console.log(`Switch State from ${this.name} to: ${on_state}`);
+    if(on_state == false) {
       this.currentState = false;
-
       udpRequest(this.host, this.port, this.off_payload, function () {
-          console.log("Payload send: ", this.off_payload);
+          console.log("UDP message send with Payload: ", this.off_payload);
       }.bind(this));
-
     } else {
-      signal = this.on_payload;
       this.currentState = true;
-
       udpRequest(this.host, this.port, this.on_payload, function () {
-          console.log("Payload send: ", this.on_payload);
+          console.log("UDP message send with Payload: ", this.on_payload);
       }.bind(this));
-
     }
-
     callback();
   }
 
   getState(callback) {
     callback(null, this.currentState);
   }
-
 }
 
 
