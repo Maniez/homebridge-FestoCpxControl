@@ -57,7 +57,7 @@ class FestoCpxControl {
     this.server.on('message', (msg, rinfo) => {
       var receive_buffer = Buffer.from('0000', 'hex');
       receive_buffer = msg;
-      console.log(`server received udp: ${receive_buffer.toString('hex')} from ${rinfo.address}`);
+      console.log(`Accessory ${this.name} received UDP message: "${receive_buffer.toString('hex')}" from ${rinfo.address}`);
       var buf = Buffer.from('0100', 'hex');
       if(msg == buf.toString('ascii')) {
         this.currentState = true;
@@ -77,17 +77,16 @@ class FestoCpxControl {
 
   setState(state, callback) {
     var on_state = state;
-
-    console.log(`State form ${this.name} is: ${on_state}`);
+    console.log(`Switch State from ${this.name} to: ${on_state}`);
     if(on_state == false) {
       this.currentState = false;
       udpRequest(this.host, this.port, this.off_payload, function () {
-          console.log("Payload send: ", this.off_payload);
+          console.log("UDP message send with Payload: ", this.off_payload);
       }.bind(this));
     } else {
       this.currentState = true;
       udpRequest(this.host, this.port, this.on_payload, function () {
-          console.log("Payload send: ", this.on_payload);
+          console.log("UDP message send with Payload: ", this.on_payload);
       }.bind(this));
     }
     callback();
