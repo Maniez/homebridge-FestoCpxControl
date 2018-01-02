@@ -79,6 +79,7 @@ class FestoCpxControl {
     let signal;
     let host_ip = this.host;
     let host_port = this.port;
+    console.log("Payload send: ", this.currentState);
     if(on_state) {
       signal = this.off_payload;
       this.currentState = false;
