@@ -13,7 +13,6 @@ module.exports = (homebridge) => {
 class FestoCpxControl {
   constructor(log, config) {
 
-
     // config
     this.name = config["name"];
     this.host = config["host"];
@@ -27,13 +26,11 @@ class FestoCpxControl {
     this.log = log;
 
     this.service = new Service.Switch(this.name);
-    //this.setupCpxSwitchService(this.service);
 
     this.service
       .getCharacteristic(Characteristic.On)
       .on('get', this.getState.bind(this))
       .on('set', this.setState.bind(this));
-
 
     // information service
     this.informationService = new Service.AccessoryInformation();
@@ -44,15 +41,12 @@ class FestoCpxControl {
       .setCharacteristic(Characteristic.SerialNumber, '5');;
 
     //UDP Server Code
-
     this.server = dgram.createSocket('udp4');
-
 
     this.server.on('error', (err) => {
       console.log(`udp server error:\n${err.stack}`);
       this.server.close();
     });
-
 
     this.server.on('message', (msg, rinfo) => {
       var receive_buffer = Buffer.from('0000', 'hex');
@@ -67,7 +61,6 @@ class FestoCpxControl {
     });
 
     this.server.bind(this.listen_port);
-
   }
 
   getServices() {
@@ -95,7 +88,6 @@ class FestoCpxControl {
   getState(callback) {
     callback(null, this.currentState);
   }
-
 }
 
 
