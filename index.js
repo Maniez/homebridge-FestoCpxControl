@@ -74,30 +74,20 @@ class FestoCpxControl {
 
 
   setState(state, callback) {
-    var on_state = this.currentState;
+    var on_state = state;
 
-    let signal;
-    let host_ip = this.host;
-    let host_port = this.port;
-    console.log("Payload send: ", this.currentState);
+    console.log(`State form ${this.name} is: ${on_state}`);
     if(on_state) {
-      signal = this.off_payload;
       this.currentState = false;
-
       udpRequest(this.host, this.port, this.off_payload, function () {
           console.log("Payload send: ", this.off_payload);
       }.bind(this));
-
     } else {
-      signal = this.on_payload;
       this.currentState = true;
-
       udpRequest(this.host, this.port, this.on_payload, function () {
           console.log("Payload send: ", this.on_payload);
       }.bind(this));
-
     }
-
     callback();
   }
 
