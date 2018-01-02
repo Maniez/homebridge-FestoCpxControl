@@ -55,7 +55,9 @@ class FestoCpxControl {
 
 
     this.server.on('message', (msg, rinfo) => {
-      console.log(`server received udp: ${msg} from ${rinfo.address}`);
+      var receive_buffer = Buffer.from('0000', 'hex');
+      receive_buffer = msg;
+      console.log(`server received udp: ${receive_buffer.toString('ascii')} from ${rinfo.address}`);
       var buf = Buffer.from('0100', 'hex');
       if(msg == buf.toString('ascii')) {
         this.currentState = true;
