@@ -13,6 +13,7 @@ The Plugin is not bound to especially the Festo CPX, you can also only send UDP 
         "port": 80,
         "on_payload": "HexValue",
         "off_payload": "HexValue",
+        "listen_port": "80"
 }
 ```
 
