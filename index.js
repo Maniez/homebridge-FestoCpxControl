@@ -73,12 +73,12 @@ class FestoCpxControl {
     console.log(`Switch State from ${this.name} to: ${on_state}`);
     if(on_state == false) {
       this.currentState = false;
-      udpRequest(this.host, this.port, this.off_payload, function () {
+      udpRequest(this.host, this.port, this.off_payload, function() {
           console.log("UDP message send with Payload: ", this.off_payload);
       }.bind(this));
     } else {
       this.currentState = true;
-      udpRequest(this.host, this.port, this.on_payload, function () {
+      udpRequest(this.host, this.port, this.on_payload, function() {
           console.log("UDP message send with Payload: ", this.on_payload);
       }.bind(this));
     }
@@ -92,10 +92,7 @@ class FestoCpxControl {
 
 
 udpRequest = function(host, port, payload, callback) {
-  udp(host, port, payload, function (err) {
+  udp(host, port, payload, (err) => {
       callback(err);
   });
-},
-getServices = function() {
-return [this.service];
 }
